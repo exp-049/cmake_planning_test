@@ -1,19 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
-project(cmake_planning_test)
+project(planning
+    VERSION 0.1.0
+    DESCRIPTION "A simple CMake project to test CMake features"
+    HOMEPAGE_URL "https://github.com/exp-049/cmake_planning_test"
+    LANGUAGES CXX
+)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+set(Process_Dir ${CMAKE_CURRENT_SOURCE_DIR}/src/process)
+set(Pnc_Map_Dir ${CMAKE_CURRENT_SOURCE_DIR}/src/pnc_map)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
-# 源码
-aux_source_directory(${PROJECT_SOURCE_DIR}/src SRC_LIST)
-
-# 静态库 / 动态库
-add_library(common SHARED ${SRC_LIST})
-target_include_directories(common PUBLIC ${PROJECT_SOURCE_DIR}/include)
-
-# 可执行程序
-add_executable(planning_main planning_main.cpp)
-target_link_libraries(planning_main PRIVATE common)
-target_include_directories(planning_main PRIVATE ${PROJECT_SOURCE_DIR}/include)
+add_subdirectory(src)
